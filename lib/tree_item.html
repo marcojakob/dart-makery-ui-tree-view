@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+
+<polymer-element name="tree-item">
+
+  <!-- 
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/tree_item.css">
+   -->
+
+  <template>
+    <li class="tree-item-li">
+      <span class="tree-item-content">
+        <span class="tree-item-toggle" on-click="toggle"></span><span class="tree-item-icon" on-click="select" on-doubleclick="toggle"></span><span class="tree-item-label" on-click="select" on-doubleclick="toggle">{{item.name}}</span>
+      </span>
+      
+      <ul class="tree-item-children">
+        <template repeat="{{child in item.children}}">
+          <tree-item item="{{child}}" treeView="{{treeView}}"></tree-item>
+        </template>
+      </ul>
+    </li>
+  </template>
+  
+  <script type="application/dart" src="tree_item.dart"></script>
+</polymer-element>

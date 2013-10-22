@@ -1,0 +1,5 @@
+name: tree_view
+description: A sample Polymer application
+dependencies:
+  animation: any
+  polymer: any
