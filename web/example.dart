@@ -45,60 +45,60 @@ class TreeViewExampleElement extends PolymerElement {
   }
   
   TreeItem get stringRoot {
-    TreeItem root = new TreeItem(TYPE_FOLDER);
+    TreeItem root = new FolderTreeItem('');
     
-    TreeItem item0 = new TreeItem(TYPE_FOLDER, data: 'Item 0', parent: root);
-    TreeItem item1 = new TreeItem(TYPE_FOLDER, data: 'Item 1', parent: root);
-    TreeItem item2 = new TreeItem(TYPE_FOLDER, data: 'Item 2', parent: root);
+    TreeItem item0 = new FolderTreeItem('Item 0', parent: root);
+    TreeItem item1 = new FolderTreeItem('Item 1', parent: root);
+    TreeItem item2 = new FolderTreeItem('Item 2', parent: root);
     
-    TreeItem item00 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0', parent: item0);
-    TreeItem item01 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1', parent: item0);
+    TreeItem item00 = new FolderTreeItem('Item 0.0', parent: item0);
+    TreeItem item01 = new FolderTreeItem('Item 0.1', parent: item0);
     
-    TreeItem item10 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0', parent: item1);
-    TreeItem item11 = new TreeItem(TYPE_FOLDER, data: 'Item 1.1', parent: item1);
+    TreeItem item10 = new FolderTreeItem('Item 1.0', parent: item1);
+    TreeItem item11 = new FolderTreeItem('Item 1.1', parent: item1);
     
-    TreeItem item000 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.0', parent: item00);
-    TreeItem item001 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.1', parent: item00);
+    TreeItem item000 = new FolderTreeItem('Item 0.0.0', parent: item00);
+    TreeItem item001 = new FolderTreeItem('Item 0.0.1', parent: item00);
     
-    TreeItem item010 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1.0', parent: item01);
+    TreeItem item010 = new FolderTreeItem('Item 0.1.0', parent: item01);
     
-    TreeItem item100 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0.0', parent: item10);
+    TreeItem item100 = new FolderTreeItem('Item 1.0.0', parent: item10);
     
     // Large Tree test!
 //    for (int i = 0; i < 1000; i++) {
-//      new TreeItem(TYPE_FOLDER, data: 'Item a$i', parent: item0);
+//      new FolderTreeItem('Item a$i', parent: item0);
 //    }
     
     return root;
   }
   
   TreeItem get documentRoot {
-    TreeItem documentRoot = new TreeItem(TYPE_FOLDER);
+    TreeItem documentRoot = new FolderTreeItem(TYPE_FOLDER);
     
-    TreeItem countries = new TreeItem(TYPE_FOLDER, data: new Folder('Countries'), getNameFunc: FOLDER_NAME_FUNC, parent: documentRoot);
-    TreeItem cities = new TreeItem(TYPE_FOLDER, data: new Folder('Cities'), getNameFunc: FOLDER_NAME_FUNC, parent: documentRoot);
-    TreeItem islands = new TreeItem(TYPE_FOLDER, data: new Folder('Islands'), getNameFunc: FOLDER_NAME_FUNC, parent: documentRoot);
+    TreeItem countries = new FolderTreeItem('Countries', parent: documentRoot);
+    TreeItem cities = new FolderTreeItem('Cities', parent: documentRoot);
+    TreeItem islands = new FolderTreeItem('Islands', parent: documentRoot);
     
-    TreeItem europe = new TreeItem(TYPE_FOLDER, data: new Folder('Europe'), getNameFunc: FOLDER_NAME_FUNC, parent: countries);
-    TreeItem asia = new TreeItem(TYPE_FOLDER, data: new Folder('Asia'), getNameFunc: FOLDER_NAME_FUNC, parent: countries);
+    TreeItem europe = new FolderTreeItem('Europe', parent: countries);
+    TreeItem asia = new FolderTreeItem('Asia', parent: countries);
     
     // Countries
-    TreeItem spain = new TreeItem(TYPE_DOCUMENT, data: new Document('Spain.doc'), getNameFunc: DOCUMENT_NAME_FUNC, parent: europe);
-    TreeItem italy = new TreeItem(TYPE_DOCUMENT, data: new Document('Italy.doc'), getNameFunc: DOCUMENT_NAME_FUNC, parent: europe);
-    TreeItem china = new TreeItem(TYPE_DOCUMENT, data: new Document('China.pdf'), getNameFunc: DOCUMENT_NAME_FUNC, parent: asia);
+    TreeItem spain = new DocumentTreeItem(new Document('Spain.doc'), europe);
+    TreeItem italy = new DocumentTreeItem(new Document('Italy.doc'), europe);
+    TreeItem china = new DocumentTreeItem(new Document('China.pdf'), asia);
     
     // Cities
-    TreeItem zurich = new TreeItem(TYPE_IMAGE, data: new Document('zurich.jpg'), getNameFunc: DOCUMENT_NAME_FUNC, parent: cities);
-    TreeItem bern = new TreeItem(TYPE_IMAGE, data: new Document('bern.jpg'), getNameFunc: DOCUMENT_NAME_FUNC, parent: cities);
-    TreeItem geneva = new TreeItem(TYPE_IMAGE, data: new Document('geneva.png'), getNameFunc: DOCUMENT_NAME_FUNC, parent: cities);
+    TreeItem zurich = new DocumentTreeItem(new Document('zurich.jpg'), cities);
+    TreeItem bern = new DocumentTreeItem(new Document('bern.jpg'), cities);
+    TreeItem geneva = new DocumentTreeItem(new Document('geneva.png'), cities);
     
     // Islands
-    TreeItem largeIslands = new TreeItem(TYPE_FOLDER, data: new Document('Large Islands'), getNameFunc: DOCUMENT_NAME_FUNC, parent: islands);
-    TreeItem smallIslands = new TreeItem(TYPE_FOLDER, data: new Document('Small Islands'), getNameFunc: DOCUMENT_NAME_FUNC, parent: islands);
-    TreeItem madagascar = new TreeItem(TYPE_DOCUMENT, data: new Folder('Madagascar'), getNameFunc: FOLDER_NAME_FUNC, parent: largeIslands);
-    TreeItem java = new TreeItem(TYPE_DOCUMENT, data: new Folder('Java'), getNameFunc: FOLDER_NAME_FUNC, parent: largeIslands);
-    TreeItem ibiza = new TreeItem(TYPE_DOCUMENT, data: new Document('Ibiza'), getNameFunc: DOCUMENT_NAME_FUNC, parent: smallIslands);
-    TreeItem corfu = new TreeItem(TYPE_DOCUMENT, data: new Document('Corfu'), getNameFunc: DOCUMENT_NAME_FUNC, parent: smallIslands);
+    TreeItem largeIslands = new FolderTreeItem('Large Islands', parent: islands);
+    TreeItem smallIslands = new FolderTreeItem('Small Islands', parent: islands);
+    TreeItem madagascar = new FolderTreeItem('Madagascar', parent: largeIslands);
+    TreeItem java = new FolderTreeItem('Java', parent: largeIslands);
+    TreeItem ibiza = new DocumentTreeItem(new Document('Ibiza'), smallIslands);
+    TreeItem corfu = new DocumentTreeItem(new Document('Corfu'), smallIslands);
     
     return documentRoot;
   }
@@ -106,25 +106,25 @@ class TreeViewExampleElement extends PolymerElement {
   LazyFetcher lazyFetcher = new LazyFetcher();
   
   TreeItem get lazyRoot {
-    TreeItem lazyRoot = new TreeItem(TYPE_FOLDER);
+    TreeItem lazyRoot = new FolderTreeItem(TYPE_FOLDER);
     
-    TreeItem item0 = new TreeItem(TYPE_FOLDER, data: 'Item 0', parent: lazyRoot, isLeaf: false);
-    TreeItem item1 = new TreeItem(TYPE_FOLDER, data: 'Item 1', parent: lazyRoot, isLeaf: false);
-    TreeItem item2 = new TreeItem(TYPE_FOLDER, data: 'Item 2', parent: lazyRoot, isLeaf: true);
+    TreeItem item0 = new FolderTreeItem('Item 0', parent: lazyRoot, isLeaf: false);
+    TreeItem item1 = new FolderTreeItem('Item 1', parent: lazyRoot, isLeaf: false);
+    TreeItem item2 = new FolderTreeItem('Item 2', parent: lazyRoot, isLeaf: true);
     
     // Set no parent item for the following items. This will be done only when requested.
-    TreeItem item00 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0', isLeaf: false);
-    TreeItem item01 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1', isLeaf: false);
+    TreeItem item00 = new FolderTreeItem('Item 0.0', isLeaf: false);
+    TreeItem item01 = new FolderTreeItem('Item 0.1', isLeaf: false);
     
-    TreeItem item10 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0', isLeaf: false);
-    TreeItem item11 = new TreeItem(TYPE_FOLDER, data: 'Item 1.1', isLeaf: true);
+    TreeItem item10 = new FolderTreeItem('Item 1.0', isLeaf: false);
+    TreeItem item11 = new FolderTreeItem('Item 1.1', isLeaf: true);
     
-    TreeItem item000 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.0', isLeaf: true);
-    TreeItem item001 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.1', isLeaf: true);
+    TreeItem item000 = new FolderTreeItem('Item 0.0.0', isLeaf: true);
+    TreeItem item001 = new FolderTreeItem('Item 0.0.1', isLeaf: true);
     
-    TreeItem item010 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1.0', isLeaf: true);
+    TreeItem item010 = new FolderTreeItem('Item 0.1.0', isLeaf: true);
     
-    TreeItem item100 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0.0', isLeaf: true);
+    TreeItem item100 = new FolderTreeItem('Item 1.0.0', isLeaf: true);
     
     lazyFetcher.lazyTree[item0] = [item00, item01];
     lazyFetcher.lazyTree[item1] = [item10, item11];
@@ -141,14 +141,25 @@ class Document {
   Document(String this.documentName);
 }
 
-class Folder {
-  String folderName;
-  Folder(String this.folderName);
+class DocumentTreeItem extends TreeItem<Document> {
+  
+  DocumentTreeItem(Document data, TreeItem parent) : 
+    super(data, parent: parent, isLeaf: false);
+  
+  String get type => 'document'; 
+  
+  String get name => data.documentName; 
 }
 
-final GetNameFunc DOCUMENT_NAME_FUNC = (Document doc) => doc.documentName;
-
-final GetNameFunc FOLDER_NAME_FUNC = (Folder folder) => folder.folderName;
+class FolderTreeItem extends TreeItem<String> {
+  
+  FolderTreeItem(String data, {TreeItem parent: null, bool isLeaf: true}) : 
+    super(data, parent: parent, isLeaf: isLeaf);
+  
+  String get type => 'folder'; 
+  
+  String get name => data; 
+}
 
 class LazyFetcher extends TreeDataFetcher {
   

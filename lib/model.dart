@@ -1,11 +1,6 @@
 part of tree_view;
 
 /**
- * Function used to retrieve the name from the data object.
- */
-typedef String GetNameFunc(data);
-
-/**
  * View-model for hierarchical tree items.
  * 
  * [isLeaf] is used to indicate whether the item has children even though they
@@ -16,17 +11,10 @@ typedef String GetNameFunc(data);
  * loaded. Whenever the [children] list changes, [isLeaf] is updated 
  * accordingly. 
  */
-class TreeItem<T> extends Observable {
-  
-  /// The type used for rendering with corresponding tree item template.
-  String type;
+abstract class TreeItem<T> extends Observable {
   
   /// The data represented by this item. 
   @observable T data;
-  
-  /// The function used to retrieve the display name from the [data].
-  /// If null, toString() is used.
-  @observable GetNameFunc getNameFunc;
   
   /// A TreeItem is a leaf if it has no children. A leaf can not be expanded.
   @observable bool isLeaf;
@@ -38,12 +26,13 @@ class TreeItem<T> extends Observable {
   ObservableList<TreeItem> _children = toObservable([]);
   
   /**
-   * Constructor.
+   * Constructor. 
    * 
-   * Note: For root items the [parent] is null.
+   * For root items the [parent] is null. The [isLeaf] property is only used
+   * when children are lazy loaded. If [isLeaf] is set to false it indicates
+   * that there are children to be loaded while [children] might still be empty.
    */ 
-  TreeItem(String this.type, {T this.data, GetNameFunc this.getNameFunc,
-      TreeItem parent: null, bool this.isLeaf: true}) {
+  TreeItem(T this.data, {TreeItem parent: null, bool this.isLeaf: true}) {
     
     this.parent = parent;
     
@@ -57,6 +46,17 @@ class TreeItem<T> extends Observable {
       notifyPropertyChange(#children, null, _children);
     });
   }
+  
+  /**
+   * Returns the type used to determine the CSS class for icons. For example,
+   * if the type is 'folder', the CSS class will be 'tree-icon-type-folder'.
+   */
+  String get type;
+  
+  /**
+   * Returns the name to be displayed for this item.
+   */
+  String get name;
   
   /**
    * The children of this item as an unmodifiable list. The children can only
@@ -87,16 +87,5 @@ class TreeItem<T> extends Observable {
     }
     
     _parent = newParent;
-  }
-  
-  /**
-   * Returns the name used for displaying the item.
-   */
-  String get name {
-    if (getNameFunc != null) {
-      return getNameFunc(data);
-    } else {
-      return data.toString();
-    }
   }
 }
