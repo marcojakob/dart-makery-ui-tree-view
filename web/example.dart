@@ -103,10 +103,10 @@ class TreeViewExampleElement extends PolymerElement {
     cities.children.addAll([zurich, bern, geneva]);
     
     // Islands
-    TreeItem largeIslands = new TreeItem(TYPE_DOCUMENT, data: new Document('Large Islands'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem smallIslands = new TreeItem(TYPE_DOCUMENT, data: new Document('Small Islands'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem madagascar = new TreeItem(TYPE_FOLDER, data: new Folder('Madagascar'), getNameFunc: FOLDER_NAME_FUNC);
-    TreeItem java = new TreeItem(TYPE_FOLDER, data: new Folder('Java'), getNameFunc: FOLDER_NAME_FUNC);
+    TreeItem largeIslands = new TreeItem(TYPE_FOLDER, data: new Document('Large Islands'), getNameFunc: DOCUMENT_NAME_FUNC);
+    TreeItem smallIslands = new TreeItem(TYPE_FOLDER, data: new Document('Small Islands'), getNameFunc: DOCUMENT_NAME_FUNC);
+    TreeItem madagascar = new TreeItem(TYPE_DOCUMENT, data: new Folder('Madagascar'), getNameFunc: FOLDER_NAME_FUNC);
+    TreeItem java = new TreeItem(TYPE_DOCUMENT, data: new Folder('Java'), getNameFunc: FOLDER_NAME_FUNC);
     TreeItem ibiza = new TreeItem(TYPE_DOCUMENT, data: new Document('Ibiza'), getNameFunc: DOCUMENT_NAME_FUNC);
     TreeItem corfu = new TreeItem(TYPE_DOCUMENT, data: new Document('Corfu'), getNameFunc: DOCUMENT_NAME_FUNC);
     islands.children.addAll([largeIslands, smallIslands]);

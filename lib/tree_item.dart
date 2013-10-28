@@ -114,7 +114,7 @@ class TreeItemElement extends PolymerElement {
         if (treeView.animate) {
           // Add animation to the event queue to leave time for items to be
           // added first.
-          new Future(_animateExpandChildren);
+          new Future(_animateExpand);
         } else {
           expanded = true;
           loading = false;
@@ -123,7 +123,7 @@ class TreeItemElement extends PolymerElement {
       }).catchError((Object error) => print('An error occured: $error'));
     } else {
       if (treeView.animate) {
-        _animateExpandChildren();
+        _animateExpand();
       } else {
         expanded = true;
       }
@@ -146,32 +146,31 @@ class TreeItemElement extends PolymerElement {
   /**
    * Animates the expansion of child items.
    */
-  void _animateExpandChildren() {
+  void _animateExpand() {
     UListElement childContainer = shadowRoot.querySelector('.tree-item-children');
     childContainer.style.display = 'block';
     // Use client height as start height if an animation is running.
     int startHeight = _animationRunning ? childContainer.clientHeight : 0;
     
+    // Get the target height.
     childContainer.style.height = 'auto';
     int targetHeight = childContainer.clientHeight;
     
-    // Current height is different from target height if an animation is running.
     childContainer.style.height = '${startHeight}px';
     
     Map<String, Object> animationProperties = <String, Object>{
       'height': targetHeight
     };
     
-    if (_animationRunning) {
+    if (_animation != null) {
       _animation.stop();
     }
     
     _animationRunning = true;
     _animation = animate(childContainer, duration: 500, properties: animationProperties);
     _animation.onComplete.listen((_) {
-      childContainer.style.removeProperty('display');
-      childContainer.style.removeProperty('height');
       _animationRunning = false;
+      childContainer.style.height = 'auto';
     });
     expanded = true;
     loading = false;
@@ -194,8 +193,6 @@ class TreeItemElement extends PolymerElement {
     _animationRunning = true;
     _animation = animate(childContainer, duration: 500, properties: animationProperties);
     _animation.onComplete.listen((_) {
-      childContainer.style.removeProperty('display');
-      childContainer.style.removeProperty('height');
       _animationRunning = false;
     });
     expanded = false;
