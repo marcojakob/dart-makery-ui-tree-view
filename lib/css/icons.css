@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'tree-icons';
-  src: url('../font/tree-icons.eot?29669472');
-  src: url('../font/tree-icons.eot?29669472#iefix') format('embedded-opentype'),
-       url('../font/tree-icons.woff?29669472') format('woff'),
-       url('../font/tree-icons.ttf?29669472') format('truetype'),
-       url('../font/tree-icons.svg?29669472#tree-icons') format('svg');
+  src: url('../icons/tree-icons.eot?29669472');
+  src: url('../icons/tree-icons.eot?29669472#iefix') format('embedded-opentype'),
+       url('../icons/tree-icons.woff?29669472') format('woff'),
+       url('../icons/tree-icons.ttf?29669472') format('truetype'),
+       url('../icons/tree-icons.svg?29669472#tree-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'tree-icons';
-    src: url('../font/tree-icons.svg?29669472#tree-icons') format('svg');
+    src: url('../icons/tree-icons.svg?29669472#tree-icons') format('svg');
   }
 }
 */
