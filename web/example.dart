@@ -4,6 +4,7 @@ import 'dart:html';
 import 'dart:async';
 import 'package:polymer/polymer.dart';
 
+// TODO: Use package: notation when fixed.
 import 'packages/tree_view/tree_view.dart';
 
 const String TYPE_FOLDER = 'folder';
@@ -46,32 +47,26 @@ class TreeViewExampleElement extends PolymerElement {
   TreeItem get stringRoot {
     TreeItem root = new TreeItem(TYPE_FOLDER);
     
-    TreeItem item0 = new TreeItem(TYPE_FOLDER, data: 'Item 0');
-    TreeItem item1 = new TreeItem(TYPE_FOLDER, data: 'Item 1');
-    TreeItem item2 = new TreeItem(TYPE_FOLDER, data: 'Item 2');
-    root.children.addAll([item0, item1, item2]);
+    TreeItem item0 = new TreeItem(TYPE_FOLDER, data: 'Item 0', parent: root);
+    TreeItem item1 = new TreeItem(TYPE_FOLDER, data: 'Item 1', parent: root);
+    TreeItem item2 = new TreeItem(TYPE_FOLDER, data: 'Item 2', parent: root);
     
-    TreeItem item00 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0');
-    TreeItem item01 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1');
-    item0.children.addAll([item00, item01]);
+    TreeItem item00 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0', parent: item0);
+    TreeItem item01 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1', parent: item0);
     
-    TreeItem item10 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0');
-    TreeItem item11 = new TreeItem(TYPE_FOLDER, data: 'Item 1.1');
-    item1.children.addAll([item10, item11]);
+    TreeItem item10 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0', parent: item1);
+    TreeItem item11 = new TreeItem(TYPE_FOLDER, data: 'Item 1.1', parent: item1);
     
-    TreeItem item000 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.0');
-    TreeItem item001 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.1');
-    item00.children.addAll([item000, item001]);
+    TreeItem item000 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.0', parent: item00);
+    TreeItem item001 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0.1', parent: item00);
     
-    TreeItem item010 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1.0');
-    item01.children.addAll([item010]);
+    TreeItem item010 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1.0', parent: item01);
     
-    TreeItem item100 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0.0');
-    item10.children.addAll([item100]);
+    TreeItem item100 = new TreeItem(TYPE_FOLDER, data: 'Item 1.0.0', parent: item10);
     
     // Large Tree test!
 //    for (int i = 0; i < 1000; i++) {
-//      item0.children.add(new TreeItem(TYPE_FOLDER, data: 'Item a$i'));
+//      new TreeItem(TYPE_FOLDER, data: 'Item a$i', parent: item0);
 //    }
     
     return root;
@@ -80,38 +75,30 @@ class TreeViewExampleElement extends PolymerElement {
   TreeItem get documentRoot {
     TreeItem documentRoot = new TreeItem(TYPE_FOLDER);
     
-    TreeItem countries = new TreeItem(TYPE_FOLDER, data: new Folder('Countries'), getNameFunc: FOLDER_NAME_FUNC);
-    TreeItem cities = new TreeItem(TYPE_FOLDER, data: new Folder('Cities'), getNameFunc: FOLDER_NAME_FUNC);
-    TreeItem islands = new TreeItem(TYPE_FOLDER, data: new Folder('Islands'), getNameFunc: FOLDER_NAME_FUNC);
-    documentRoot.children.addAll([countries, cities, islands]);
+    TreeItem countries = new TreeItem(TYPE_FOLDER, data: new Folder('Countries'), getNameFunc: FOLDER_NAME_FUNC, parent: documentRoot);
+    TreeItem cities = new TreeItem(TYPE_FOLDER, data: new Folder('Cities'), getNameFunc: FOLDER_NAME_FUNC, parent: documentRoot);
+    TreeItem islands = new TreeItem(TYPE_FOLDER, data: new Folder('Islands'), getNameFunc: FOLDER_NAME_FUNC, parent: documentRoot);
     
-    TreeItem europe = new TreeItem(TYPE_FOLDER, data: new Folder('Europe'), getNameFunc: FOLDER_NAME_FUNC);
-    TreeItem asia = new TreeItem(TYPE_FOLDER, data: new Folder('Asia'), getNameFunc: FOLDER_NAME_FUNC);
-    countries.children.addAll([europe, asia]);
+    TreeItem europe = new TreeItem(TYPE_FOLDER, data: new Folder('Europe'), getNameFunc: FOLDER_NAME_FUNC, parent: countries);
+    TreeItem asia = new TreeItem(TYPE_FOLDER, data: new Folder('Asia'), getNameFunc: FOLDER_NAME_FUNC, parent: countries);
     
     // Countries
-    TreeItem spain = new TreeItem(TYPE_DOCUMENT, data: new Document('Spain.doc'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem italy = new TreeItem(TYPE_DOCUMENT, data: new Document('Italy.doc'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem china = new TreeItem(TYPE_DOCUMENT, data: new Document('China.pdf'), getNameFunc: DOCUMENT_NAME_FUNC);
-    europe.children.addAll([spain, italy]);
-    asia.children.addAll([china]);
+    TreeItem spain = new TreeItem(TYPE_DOCUMENT, data: new Document('Spain.doc'), getNameFunc: DOCUMENT_NAME_FUNC, parent: europe);
+    TreeItem italy = new TreeItem(TYPE_DOCUMENT, data: new Document('Italy.doc'), getNameFunc: DOCUMENT_NAME_FUNC, parent: europe);
+    TreeItem china = new TreeItem(TYPE_DOCUMENT, data: new Document('China.pdf'), getNameFunc: DOCUMENT_NAME_FUNC, parent: asia);
     
     // Cities
-    TreeItem zurich = new TreeItem(TYPE_IMAGE, data: new Document('zurich.jpg'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem bern = new TreeItem(TYPE_IMAGE, data: new Document('bern.jpg'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem geneva = new TreeItem(TYPE_IMAGE, data: new Document('geneva.png'), getNameFunc: DOCUMENT_NAME_FUNC);
-    cities.children.addAll([zurich, bern, geneva]);
+    TreeItem zurich = new TreeItem(TYPE_IMAGE, data: new Document('zurich.jpg'), getNameFunc: DOCUMENT_NAME_FUNC, parent: cities);
+    TreeItem bern = new TreeItem(TYPE_IMAGE, data: new Document('bern.jpg'), getNameFunc: DOCUMENT_NAME_FUNC, parent: cities);
+    TreeItem geneva = new TreeItem(TYPE_IMAGE, data: new Document('geneva.png'), getNameFunc: DOCUMENT_NAME_FUNC, parent: cities);
     
     // Islands
-    TreeItem largeIslands = new TreeItem(TYPE_FOLDER, data: new Document('Large Islands'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem smallIslands = new TreeItem(TYPE_FOLDER, data: new Document('Small Islands'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem madagascar = new TreeItem(TYPE_DOCUMENT, data: new Folder('Madagascar'), getNameFunc: FOLDER_NAME_FUNC);
-    TreeItem java = new TreeItem(TYPE_DOCUMENT, data: new Folder('Java'), getNameFunc: FOLDER_NAME_FUNC);
-    TreeItem ibiza = new TreeItem(TYPE_DOCUMENT, data: new Document('Ibiza'), getNameFunc: DOCUMENT_NAME_FUNC);
-    TreeItem corfu = new TreeItem(TYPE_DOCUMENT, data: new Document('Corfu'), getNameFunc: DOCUMENT_NAME_FUNC);
-    islands.children.addAll([largeIslands, smallIslands]);
-    largeIslands.children.addAll([madagascar, java]);
-    smallIslands.children.addAll([ibiza, corfu]);
+    TreeItem largeIslands = new TreeItem(TYPE_FOLDER, data: new Document('Large Islands'), getNameFunc: DOCUMENT_NAME_FUNC, parent: islands);
+    TreeItem smallIslands = new TreeItem(TYPE_FOLDER, data: new Document('Small Islands'), getNameFunc: DOCUMENT_NAME_FUNC, parent: islands);
+    TreeItem madagascar = new TreeItem(TYPE_DOCUMENT, data: new Folder('Madagascar'), getNameFunc: FOLDER_NAME_FUNC, parent: largeIslands);
+    TreeItem java = new TreeItem(TYPE_DOCUMENT, data: new Folder('Java'), getNameFunc: FOLDER_NAME_FUNC, parent: largeIslands);
+    TreeItem ibiza = new TreeItem(TYPE_DOCUMENT, data: new Document('Ibiza'), getNameFunc: DOCUMENT_NAME_FUNC, parent: smallIslands);
+    TreeItem corfu = new TreeItem(TYPE_DOCUMENT, data: new Document('Corfu'), getNameFunc: DOCUMENT_NAME_FUNC, parent: smallIslands);
     
     return documentRoot;
   }
@@ -121,14 +108,11 @@ class TreeViewExampleElement extends PolymerElement {
   TreeItem get lazyRoot {
     TreeItem lazyRoot = new TreeItem(TYPE_FOLDER);
     
-    TreeItem item0 = new TreeItem(TYPE_FOLDER, data: 'Item 0', isLeaf: false);
-    TreeItem item1 = new TreeItem(TYPE_FOLDER, data: 'Item 1', isLeaf: false);
-    TreeItem item2 = new TreeItem(TYPE_FOLDER, data: 'Item 2', isLeaf: true);
+    TreeItem item0 = new TreeItem(TYPE_FOLDER, data: 'Item 0', parent: lazyRoot, isLeaf: false);
+    TreeItem item1 = new TreeItem(TYPE_FOLDER, data: 'Item 1', parent: lazyRoot, isLeaf: false);
+    TreeItem item2 = new TreeItem(TYPE_FOLDER, data: 'Item 2', parent: lazyRoot, isLeaf: true);
     
-    lazyRoot.children.addAll([item0, item1, item2]);
-    
-    // Set no parent item for the following items. This will be done only when
-    // requested.
+    // Set no parent item for the following items. This will be done only when requested.
     TreeItem item00 = new TreeItem(TYPE_FOLDER, data: 'Item 0.0', isLeaf: false);
     TreeItem item01 = new TreeItem(TYPE_FOLDER, data: 'Item 0.1', isLeaf: false);
     
@@ -175,7 +159,7 @@ class LazyFetcher extends TreeDataFetcher {
     Completer completer = new Completer();
     
     // Simulate a delay.
-    new Future.delayed(const Duration(seconds:1), () {
+    new Future.delayed(const Duration(seconds: 1), () {
       completer.complete(lazyTree[parent]);
     });
     

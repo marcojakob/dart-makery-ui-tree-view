@@ -3,6 +3,7 @@ library tree_view;
 import 'package:polymer/polymer.dart';
 import 'dart:html';
 import 'dart:async';
+import 'dart:collection';
 
 import 'tree_item.dart';
 export 'tree_item.dart';

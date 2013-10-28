@@ -107,9 +107,10 @@ class TreeItemElement extends PolymerElement {
           return;
         }
         
-        // Add children to the parent.
-        item.children.clear();
-        item.children.addAll(childItems);
+        // Set parent of all child items.
+        childItems.forEach((TreeItem childItem) {
+          childItem.parent = item;
+        });
         
         if (treeView.animate) {
           // Add animation to the event queue to leave time for items to be

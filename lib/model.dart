@@ -31,21 +31,62 @@ class TreeItem<T> extends Observable {
   /// A TreeItem is a leaf if it has no children. A leaf can not be expanded.
   @observable bool isLeaf;
   
+  /// A reference to the parent item or null if it is the root.
+  TreeItem _parent = null;
+  
   /// The children of this item.
-  final ObservableList<TreeItem> children = toObservable([]);
+  ObservableList<TreeItem> _children = toObservable([]);
   
   /**
    * Constructor.
    * 
    * Note: For root items the [parent] is null.
    */ 
-  TreeItem(String this.type, {T this.data, bool this.isLeaf: true, 
-      GetNameFunc this.getNameFunc}) {
+  TreeItem(String this.type, {T this.data, GetNameFunc this.getNameFunc,
+      TreeItem parent: null, bool this.isLeaf: true}) {
     
-    // Whenever the children list changes, the isLeaf property is set automatically.
-    children.changes.listen((List<ChangeRecord> changes) {
+    this.parent = parent;
+    
+    // Whenever the children list changes, the isLeaf property is set 
+    // automatically. 
+    _children.changes.listen((List<ChangeRecord> changes) {
       isLeaf = children.isEmpty;
+      
+      // Notify the children getter about the change.
+      // TODO: Maybe add non-null as old value?
+      notifyPropertyChange(#children, null, _children);
     });
+  }
+  
+  /**
+   * The children of this item as an unmodifiable list. The children can only
+   * be modified by setting the children's parent. 
+   * Whenever the children are changed this property is notified.
+   */
+  List<TreeItem> get children => new UnmodifiableListView(_children);
+  
+  /**
+   * Returns the parent.
+   */
+  @observable
+  TreeItem get parent => parent;
+  
+  /**
+   * Sets the parent. Also removes this item from the old parent's children and 
+   * adds it to the new parent's children.
+   */
+  set parent(TreeItem newParent) {
+    // Remove itself from the old parent's children.
+    if (_parent != null) {
+      _parent._children.remove(this);
+    }
+    
+    // Add itself to the new parent's children.
+    if (newParent != null && !newParent._children.contains(this)) {
+      newParent._children.add(this);
+    }
+    
+    _parent = newParent;
   }
   
   /**
