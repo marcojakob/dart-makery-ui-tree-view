@@ -1,7 +1,7 @@
 library tree_view;
 
 import 'package:polymer/polymer.dart';
-import 'dart:html';
+import 'dart:html' show CustomEvent, Element, EventStreamProvider;
 import 'dart:async';
 import 'dart:collection';
 
@@ -30,7 +30,7 @@ class TreeViewElement extends PolymerElement {
   @published TreeDataFetcher fetcher = new DefaultTreeDataFetcher();
 
   /// All currently selected items.
-  List<TreeItemElement> selectedItemElements = [];
+  List<TreeItem> selectedItems = [];
   
   /// Let styles defined in the author's document "bleed" trough to the shadow DOM.
   bool get applyAuthorStyles => true;
@@ -84,5 +84,62 @@ class TreeViewElement extends PolymerElement {
   
   void dispatchDeselectedEvent(Element element, TreeItem item) {
     fire('itemdeselected', detail: item);
+  }
+  
+  /**
+   * Ensures that the [item] is visible by expanding all its parents.
+   */
+  void ensureVisible(TreeItem item) {
+    if (item.parent != null) {
+      item.parent.expanded = true;
+      // Recursive call to get all parents.
+      ensureVisible(item.parent);
+    }
+  }
+  
+  /**
+   * Selects all items of the tree that satisfy the predicate [test]. All 
+   * previously selected items are deselected. The tree is expanded so that all 
+   * selected items are shown. No events are fired.
+   * 
+   * The returned list contains all items that were selected.
+   */
+  List<TreeItem> selectWhere(bool test(TreeItem item)) {
+    // Deselect all items.
+    selectedItems.forEach((el) => el.selected = false);
+    
+    // Find the items in the tree.
+    List<TreeItem> foundItems = findItems(test);
+    foundItems.forEach((TreeItem item) {
+      item.selected = true;
+      ensureVisible(item);
+    });
+  }
+  
+  /**
+   * Returns all items satisfying the predicate [test].
+   */
+  List<TreeItem> findItems(bool test(TreeItem item)) {
+    List<TreeItem> result = [];
+    // First test if root satisfies the test.
+    if (test(root)) {
+      result.add(root);
+    }
+    _findItemsInChildren(root, test, result);
+    return result;
+  }
+  
+  /**
+   * Recursively searches the children of [parent] to find the items that 
+   * satisfy the predicate [test] and adds them to [result]. 
+   */
+  void _findItemsInChildren(TreeItem parent, bool test(TreeItem item), 
+                            List<TreeItem> result) {
+    parent.children.forEach((TreeItem child) {
+      if (test(child)) {
+        result.add(child);
+      }
+      _findItemsInChildren(child, test, result);
+    });
   }
 }

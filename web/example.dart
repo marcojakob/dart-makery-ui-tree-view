@@ -138,7 +138,7 @@ class Document {
 class DocumentTreeItem extends TreeItem<Document> {
   
   DocumentTreeItem(Document data, TreeItem parent) : 
-    super(data, parent: parent, isLeaf: false);
+    super(data, parent: parent, isLeaf: true);
   
   String get type => 'document'; 
   

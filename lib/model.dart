@@ -25,6 +25,12 @@ abstract class TreeItem<T> extends Observable {
   /// The children of this item.
   ObservableList<TreeItem> _children = toObservable([]);
   
+  /// True if the item's children are shown.
+  @observable bool expanded = false;
+  
+  /// True if the item is selected.
+  @observable bool selected = false;
+  
   /**
    * Constructor. 
    * 
