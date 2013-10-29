@@ -18,22 +18,21 @@ class TreeViewExampleElement extends PolymerElement {
   void enteredView() {
     super.enteredView();
     
-    shadowRoot.querySelectorAll('tree-view').forEach((Element element) {
-      TreeViewElement treeView = element.xtag;
+    shadowRoot.querySelectorAll('tree-view').forEach((TreeViewElement treeView) {
       
-      treeView.onExpanded.listen((CustomEvent event) {
+      treeView.onItemExpanded.listen((CustomEvent event) {
         print('Expanded node: ${event.detail}');
       });
       
-      treeView.onCollapsed.listen((CustomEvent event) {
+      treeView.onItemCollapsed.listen((CustomEvent event) {
         print('Collapsed node: ${event.detail}');
       });
       
-      treeView.onSelected.listen((CustomEvent event) {
+      treeView.onItemSelected.listen((CustomEvent event) {
         print('Selected node: ${event.detail}');
       });
       
-      treeView.onDeselected.listen((CustomEvent event) {
+      treeView.onItemDeselected.listen((CustomEvent event) {
         print('Deselected node: ${event.detail}');
       });
     });

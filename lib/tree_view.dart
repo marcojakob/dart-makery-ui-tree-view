@@ -38,47 +38,51 @@ class TreeViewElement extends PolymerElement {
   // Just a reference to this, used in the template. TODO: Remove if possible.
   TreeViewElement get instance => this;
   
-  static const EventStreamProvider<CustomEvent> _EXPANDED_EVENT = const EventStreamProvider<CustomEvent>('expanded');
-  static const EventStreamProvider<CustomEvent> _COLLAPSED_EVENT = const EventStreamProvider<CustomEvent>('collapsed');
-  static const EventStreamProvider<CustomEvent> _SELECTED_EVENT = const EventStreamProvider<CustomEvent>('selected');
-  static const EventStreamProvider<CustomEvent> _DESELECTED_EVENT = const EventStreamProvider<CustomEvent>('deselected');
+  static const EventStreamProvider<CustomEvent> _EXPANDED_EVENT = const EventStreamProvider<CustomEvent>('itemexpanded');
+  static const EventStreamProvider<CustomEvent> _COLLAPSED_EVENT = const EventStreamProvider<CustomEvent>('itemcollapsed');
+  static const EventStreamProvider<CustomEvent> _SELECTED_EVENT = const EventStreamProvider<CustomEvent>('itemselected');
+  static const EventStreamProvider<CustomEvent> _DESELECTED_EVENT = const EventStreamProvider<CustomEvent>('itemdeselected');
   
   TreeViewElement.created() : super.created() {
   }
   
   /**
    * Returns the Stream of events fired when an item is expanded.
+   * The [CustomEvent]s detail attribute contains the [TreeItem].
    */
-  Stream<Event> get onExpanded => _EXPANDED_EVENT.forTarget(this);
+  Stream<CustomEvent> get onItemExpanded => _EXPANDED_EVENT.forTarget(this);
   
   /**
    * Returns the Stream of events fired when an item is collapsed.
+   * The [CustomEvent]s detail attribute contains the [TreeItem].
    */
-  Stream<Event> get onCollapsed => _COLLAPSED_EVENT.forTarget(this);
+  Stream<CustomEvent> get onItemCollapsed => _COLLAPSED_EVENT.forTarget(this);
   
   /**
    * Returns the Stream of events fired when an item is selected.
+   * The [CustomEvent]s detail attribute contains the [TreeItem].
    */
-  Stream<Event> get onSelected => _SELECTED_EVENT.forTarget(this);
+  Stream<CustomEvent> get onItemSelected => _SELECTED_EVENT.forTarget(this);
   
   /**
    * Returns Stream of events fired when an item's selection is removed.
+   * The [CustomEvent]s detail attribute contains the [TreeItem].
    */
-  Stream<Event> get onDeselected => _DESELECTED_EVENT.forTarget(this);
+  Stream<CustomEvent> get onItemDeselected => _DESELECTED_EVENT.forTarget(this);
   
   void dispatchExpandedEvent(Element element, TreeItem item) {
-    fire('expanded', detail: item);
+    fire('itemexpanded', detail: item);
   }
   
   void dispatchCollapsedEvent(Element element, TreeItem item) {
-    fire('collapsed', detail: item);
+    fire('itemcollapsed', detail: item);
   }
   
   void dispatchSelectedEvent(Element element, TreeItem item) {
-    fire('selected', detail: item);
+    fire('itemselected', detail: item);
   }
   
   void dispatchDeselectedEvent(Element element, TreeItem item) {
-    fire('deselected', detail: item);
+    fire('itemdeselected', detail: item);
   }
 }
