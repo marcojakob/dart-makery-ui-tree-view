@@ -4,12 +4,7 @@ import 'dart:html';
 import 'dart:async';
 import 'package:polymer/polymer.dart';
 
-// TODO: Use package: notation when fixed.
-import 'packages/tree_view/tree_view.dart';
-
-const String TYPE_FOLDER = 'folder';
-const String TYPE_DOCUMENT = 'document';
-const String TYPE_IMAGE = 'jpeg';
+import 'package:tree_view/tree_view.dart';
 
 @CustomTag('tree-view-example')
 class TreeViewExampleElement extends PolymerElement {
@@ -73,7 +68,7 @@ class TreeViewExampleElement extends PolymerElement {
   }
   
   TreeItem get documentRoot {
-    TreeItem documentRoot = new FolderTreeItem(TYPE_FOLDER);
+    TreeItem documentRoot = new FolderTreeItem('');
     
     TreeItem countries = new FolderTreeItem('Countries', parent: documentRoot);
     TreeItem cities = new FolderTreeItem('Cities', parent: documentRoot);
@@ -106,7 +101,7 @@ class TreeViewExampleElement extends PolymerElement {
   LazyFetcher lazyFetcher = new LazyFetcher();
   
   TreeItem get lazyRoot {
-    TreeItem lazyRoot = new FolderTreeItem(TYPE_FOLDER);
+    TreeItem lazyRoot = new FolderTreeItem('');
     
     TreeItem item0 = new FolderTreeItem('Item 0', parent: lazyRoot, isLeaf: false);
     TreeItem item1 = new FolderTreeItem('Item 1', parent: lazyRoot, isLeaf: false);
