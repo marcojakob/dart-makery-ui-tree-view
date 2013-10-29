@@ -128,6 +128,18 @@ class TreeViewExampleElement extends PolymerElement {
     
     return lazyRoot;
   }
+  
+  /// Selects the china element in the document tree.
+  void selectChina(Event event, var detail, Element target) {
+    TreeViewElement tree = $['icons-multiple-selection'];
+    tree.selectWhere((TreeItem item) => item.name == 'China.pdf');
+  }
+  
+  /// Selects all documents in the document tree.
+  void selectDocuments(Event event, var detail, Element target) {
+    TreeViewElement tree = $['icons-multiple-selection'];
+    tree.selectWhere((TreeItem item) => item is DocumentTreeItem);
+  }
 }
 
 class Document {

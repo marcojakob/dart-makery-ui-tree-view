@@ -16,6 +16,9 @@
       root="{{documentRoot}}">
     </tree-view>
     
+    <button on-click="{{selectChina}}">Select China</button>
+    <button on-click="{{selectDocuments}}">Select Documents</button>
+    
     <h2>Lazy Loading</h2>
     <tree-view id="lazy-loading" animate="true" selection="multiple"
       root="{{lazyRoot}}" fetcher="{{lazyFetcher}}">
