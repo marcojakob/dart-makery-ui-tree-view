@@ -128,6 +128,10 @@ class TreeViewElement extends PolymerElement {
    */
   List<TreeItem> findItems(bool test(TreeItem item)) {
     List<TreeItem> result = [];
+    if (root == null) {
+      return result;
+    }
+    
     // First test if root satisfies the test.
     if (test(root)) {
       result.add(root);
