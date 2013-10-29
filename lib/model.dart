@@ -75,7 +75,7 @@ abstract class TreeItem<T> extends Observable {
    * Returns the parent.
    */
   @observable
-  TreeItem get parent => parent;
+  TreeItem get parent => _parent;
   
   /**
    * Sets the parent. Also removes this item from the old parent's children and 
