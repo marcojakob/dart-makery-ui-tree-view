@@ -97,6 +97,13 @@ class TreeViewElement extends PolymerElement {
   }
   
   /**
+   * Deselects all items. No events are fired.
+   */
+  void clearSelection() {
+    selectedItems.forEach((el) => el.selected = false);
+  }
+  
+  /**
    * Selects all items of the tree that satisfy the predicate [test]. All 
    * previously selected items are deselected. The tree is expanded so that all 
    * selected items are shown. No events are fired.
@@ -104,8 +111,7 @@ class TreeViewElement extends PolymerElement {
    * The returned list contains all items that were selected.
    */
   List<TreeItem> selectWhere(bool test(TreeItem item)) {
-    // Deselect all items.
-    selectedItems.forEach((el) => el.selected = false);
+    clearSelection();
     
     // Find the items in the tree.
     List<TreeItem> foundItems = findItems(test);
@@ -113,6 +119,8 @@ class TreeViewElement extends PolymerElement {
       item.selected = true;
       ensureVisible(item);
     });
+    
+    return foundItems;
   }
   
   /**
