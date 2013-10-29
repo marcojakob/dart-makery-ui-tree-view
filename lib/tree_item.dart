@@ -179,7 +179,8 @@ class TreeItemElement extends PolymerElement {
     _animation = animate(childContainer, duration: 500, properties: animationProperties);
     _animation.onComplete.listen((_) {
       _animationRunning = false;
-      childContainer.style.height = 'auto';
+      childContainer.style.removeProperty('height');
+      childContainer.style.removeProperty('display');
     });
     item.expanded = true;
     loading = false;
@@ -203,6 +204,8 @@ class TreeItemElement extends PolymerElement {
     _animation = animate(childContainer, duration: 500, properties: animationProperties);
     _animation.onComplete.listen((_) {
       _animationRunning = false;
+      childContainer.style.removeProperty('height');
+      childContainer.style.removeProperty('display');
     });
     item.expanded = false;
   }

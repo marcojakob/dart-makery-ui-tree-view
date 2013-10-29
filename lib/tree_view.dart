@@ -5,7 +5,6 @@ import 'dart:html' show CustomEvent, Element, EventStreamProvider;
 import 'dart:async';
 import 'dart:collection';
 
-import 'tree_item.dart';
 export 'tree_item.dart';
 
 part 'data.dart';
