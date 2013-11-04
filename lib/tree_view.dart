@@ -127,10 +127,10 @@ class TreeViewElement extends PolymerElement {
    * Returns all items satisfying the predicate [test].
    */
   List<TreeItem> findItems(bool test(TreeItem item)) {
+    // [root] must have been initialized.
+    assert(root != null);
+    
     List<TreeItem> result = [];
-    if (root == null) {
-      return result;
-    }
     
     // First test if root satisfies the test.
     if (test(root)) {
