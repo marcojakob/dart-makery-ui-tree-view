@@ -1,29 +1,19 @@
 <!DOCTYPE html>
 
-<link rel="import" href="packages/tree_view/tree_view.html">
-
-<polymer-element name="tree-view-example">
-  <link rel="stylesheet" href="example.css">
-  
-  <template>
-    <h2>Single Selection with Strings as Data</h2>
-    <tree-view id="strings-single-selection" animate="false" selection="single" 
-      root="{{stringRoot}}">
-    </tree-view>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>TreeView</title>
     
-    <h2>Multiple Selection with Folders and Documents as Data</h2>
-    <tree-view id="icons-multiple-selection" animate="true" selection="multiple"
-      root="{{documentRoot}}">
-    </tree-view>
+    <!-- @-Rules do not work with Shadow DOM yet. Import here instead of in 
+         the example component. -->
+    <link rel="stylesheet" href="tree_view_example.css">
     
-    <button on-click="{{selectChina}}">Select China</button>
-    <button on-click="{{selectDocuments}}">Select Documents</button>
+    <link rel="import" href="tree_view_example.html">
     
-    <h2>Lazy Loading</h2>
-    <tree-view id="lazy-loading" animate="true" selection="multiple"
-      root="{{lazyRoot}}" fetcher="{{lazyFetcher}}">
-    </tree-view>
-    
-  </template>
-  <script type="application/dart" src="example.dart"></script>
-</polymer-element>    
+    <script type="application/dart">export 'package:polymer/init.dart';</script>
+  </head>
+  <body>
+    <tree-view-example></tree-view-example>
+  </body>
+</html>

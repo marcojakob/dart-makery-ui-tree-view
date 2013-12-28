@@ -5,29 +5,7 @@
 
 <polymer-element name="tree-view">
   <template>
-    <!-- 
-    <link rel="stylesheet" href="css/tree_view.css">
-     -->
-    <style>
-      tree-view {
-        display: block;
-      }
-      
-      .tree-view-children-ul {
-        height: 100%;
-        margin: 0;
-        overflow: auto;
-        padding: 3px;
-        white-space: nowrap;
-        
-        -webkit-touch-callout: none;
-          -webkit-user-select: none;
-           -khtml-user-select: none;
-             -moz-user-select: none;
-              -ms-user-select: none;
-                  user-select: none;
-      }
-    </style>
+    <link rel="stylesheet" href="tree_view.css">
     
     <ul class="tree-view-children-ul">
       <template if="{{root != null}}">

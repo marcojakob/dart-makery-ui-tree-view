@@ -1,5 +1,5 @@
-packages
-out/
+packages/
+build/
 .project
 .buildlog
 pubspec.lock

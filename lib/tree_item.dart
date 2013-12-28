@@ -99,7 +99,7 @@ class TreeItemElement extends PolymerElement {
   }
   
   /**
-   * Expandes this [item].
+   * Expands this [item].
    */
   void _expand() {
     treeView.dispatchExpandedEvent(this, item);

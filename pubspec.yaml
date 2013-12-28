@@ -4,3 +4,6 @@ description: A sample Polymer application
 dependencies:
   animation: any
   polymer: any
+transformers:
+- polymer:
+    entry_points: web/example.html

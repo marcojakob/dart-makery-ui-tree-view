@@ -39,7 +39,6 @@ abstract class TreeItem<T> extends Observable {
    * that there are children to be loaded while [children] might still be empty.
    */ 
   TreeItem(T this.data, {TreeItem parent: null, bool this.isLeaf: true}) {
-    
     this.parent = parent;
     
     // Whenever the children list changes, the isLeaf property is set 

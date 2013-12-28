@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<link rel="import" href="packages/tree_view/tree_view.html">
+
+<polymer-element name="tree-view-example">
+  <template>
+    <!-- 
+    <link rel="stylesheet" href="tree_view_example.css">
+     -->
+  
+    <h2>Single Selection with Strings as Data</h2>
+    <tree-view id="strings-single-selection" animate="false" selection="single" 
+      root="{{stringRoot}}">
+    </tree-view>
+    
+    <h2>Multiple Selection with Folders and Documents as Data</h2>
+    <tree-view id="icons-multiple-selection" animate="true" selection="multiple"
+      root="{{documentRoot}}">
+    </tree-view>
+    
+    <button on-click="{{selectChina}}">Select China</button>
+    <button on-click="{{selectDocuments}}">Select Documents</button>
+    
+    <h2>Lazy Loading</h2>
+    <tree-view id="lazy-loading" animate="true" selection="multiple"
+      root="{{lazyRoot}}" fetcher="{{lazyFetcher}}">
+    </tree-view>
+    
+  </template>
+  <script type="application/dart" src="tree_view_example.dart"></script>
+</polymer-element>    
