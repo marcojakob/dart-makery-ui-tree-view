@@ -25,6 +25,9 @@
   vertical-align: top;
   width: 1em;
   margin-top: 1px;
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
 }
 
 .tree-item-icon {
