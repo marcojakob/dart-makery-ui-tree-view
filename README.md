@@ -1,5 +1,7 @@
 # TreeView element for Polymer.dart #
 
+![TreeView Example](https://raw.github.com/marcojakob/dart-makery-ui-tree-view/master/doc/treeview-example.png)
+
 ## Features ##
 * Single- and multi-selection
 * View-model for hierarchical tree items
