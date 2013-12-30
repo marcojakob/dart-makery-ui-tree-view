@@ -123,11 +123,13 @@ class TreeItemElement extends PolymerElement {
     if (item.children.isEmpty) {
       loading = true;
       
+      // Fetch children.
       treeView.fetcher.fetchChildren(item).then((List<TreeItem> childItems) {
 
         if (childItems == null || childItems.isEmpty) {
           // No child items found --> is a leaf!
           item.isLeaf = true;
+          loading = false;
           return;
         }
         
@@ -145,7 +147,7 @@ class TreeItemElement extends PolymerElement {
           loading = false;
         }
         
-      }).catchError((Object error) => print('An error occured: $error'));
+      }).catchError((Object error) => print('An error occured when trying to fetch children: $error'));
     } else {
       if (treeView.animate) {
         _animateExpand();

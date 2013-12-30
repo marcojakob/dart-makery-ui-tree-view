@@ -1,7 +1,5 @@
 # TreeView element for Polymer.dart #
 
-![TreeView Example](https://raw.github.com/marcojakob/dart-makery-ui-tree-view/master/doc/treeview-example.png)
-
 ## Features ##
 * Single- and multi-selection
 * View-model for hierarchical tree items
@@ -12,6 +10,8 @@
 ## Example ##
 The example is inside the [`web`](https://github.com/marcojakob/dart-makery-ui-tree-view/tree/master/web) 
 because Pub Build does not (yet) work with the `example` directory.
+
+![TreeView Example](https://raw.github.com/marcojakob/dart-makery-ui-tree-view/master/doc/treeview-example.png)
 
 ## Credits ##
 * The [Tree](http://html-components.appspot.com/components/data/tree) component 

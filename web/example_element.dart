@@ -155,6 +155,7 @@ class DocumentTreeItem extends TreeItem<Document> {
   DocumentTreeItem(Document data, TreeItem parent) : 
     super(data, parent: parent, isLeaf: true);
   
+  @observable
   String get name => data.documentName; 
   
   List<String> get toggleIconStyles => ['fa', 'fa-caret-right'];
@@ -173,6 +174,7 @@ class FolderTreeItem extends TreeItem<String> {
   FolderTreeItem(String data, {TreeItem parent: null, bool isLeaf: true}) : 
     super(data, parent: parent, isLeaf: isLeaf);
   
+  @observable
   String get name => data; 
   
   List<String> get toggleIconStyles => ['fa', 'fa-caret-right'];

@@ -23,7 +23,7 @@ abstract class TreeItem<T> extends Observable {
   TreeItem _parent = null;
   
   /// The children of this item.
-  ObservableList<TreeItem> _children = toObservable([]);
+  Set<TreeItem> _children = new Set();
   
   /// True if the item's children are shown.
   @observable bool expanded = false;
@@ -40,22 +40,69 @@ abstract class TreeItem<T> extends Observable {
    */ 
   TreeItem(T this.data, {TreeItem parent: null, bool this.isLeaf: true}) {
     this.parent = parent;
-    
-    // Whenever the children list changes, the isLeaf property is set 
-    // automatically. 
-    _children.changes.listen((List<ChangeRecord> changes) {
-      isLeaf = children.isEmpty;
-      
-      // Notify the children getter about the change.
-      // TODO: Maybe add non-null as old value?
-      notifyPropertyChange(#children, null, _children);
-    });
   }
   
   /**
    * The name to be displayed for this item.
    */
+  @observable
   String get name;
+  
+  /**
+   * Returns the parent.
+   */
+  @observable
+  TreeItem get parent => _parent;
+  
+  /**
+   * Sets the parent. Also removes this item from the old parent's children and 
+   * adds it to the new parent's children.
+   */
+  set parent(TreeItem newParent) {
+    // Remove itself from the old parent's children.
+    if (_parent != null) {
+      _parent._removeChild(this);
+    }
+    
+    // Add itself to the new parent's children.
+    if (newParent != null) {
+      newParent._addChild(this);
+    }
+    
+    _parent = newParent;
+  }
+  
+  /**
+   * The children of this item as an unmodifiable list. The children can only
+   * be modified from the outside by setting the children's parent. 
+   * 
+   * Whenever the underlying list changes this property is notified.
+   */
+  @observable
+  List<TreeItem> get children => new UnmodifiableListView(_children);
+
+  /**
+   * Adds the [child] and notifies that the [children] have changed.
+   */
+  void _addChild(TreeItem child) {
+    _children.add(child);
+    isLeaf = children.isEmpty;
+    
+    // TODO: Should we add something as old value?
+    notifyPropertyChange(#children, null, children);
+  }
+  
+  /**
+   * Removes the [child] and notifies that the [children] have changed.
+   */
+  void _removeChild(TreeItem child) {
+    _children.remove(child);
+    isLeaf = children.isEmpty;
+    
+    // TODO: Should we add something as old value?
+    notifyPropertyChange(#children, null, children);
+  }
+  
   
   /**
    * CSS classes used for the (collapsed) toggle icon.
@@ -81,35 +128,4 @@ abstract class TreeItem<T> extends Observable {
    * CSS classes used for the loading item icon.
    */
   List<String> get itemIconLoadingStyles;
-  
-  /**
-   * The children of this item as an unmodifiable list. The children can only
-   * be modified by setting the children's parent. 
-   * Whenever the children are changed this property is notified.
-   */
-  List<TreeItem> get children => new UnmodifiableListView(_children);
-  
-  /**
-   * Returns the parent.
-   */
-  @observable
-  TreeItem get parent => _parent;
-  
-  /**
-   * Sets the parent. Also removes this item from the old parent's children and 
-   * adds it to the new parent's children.
-   */
-  set parent(TreeItem newParent) {
-    // Remove itself from the old parent's children.
-    if (_parent != null) {
-      _parent._children.remove(this);
-    }
-    
-    // Add itself to the new parent's children.
-    if (newParent != null && !newParent._children.contains(this)) {
-      newParent._children.add(this);
-    }
-    
-    _parent = newParent;
-  }
 }
