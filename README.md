@@ -1,5 +1,4 @@
-Tree View Dart Polymer Widget
-================
+# TreeView element for Polymer.dart #
 
 ## Features ##
 * Single- and multi-selection
@@ -9,8 +8,8 @@ Tree View Dart Polymer Widget
 * Animation for expand and collapse
 
 ## Example ##
-The example is inside the **`web`** because Pub Build does not work with the 
-`example` directory.
+The example is inside the [`web`](https://github.com/marcojakob/dart-makery-ui-tree-view/tree/master/web) 
+because Pub Build does not (yet) work with the `example` directory.
 
 ## Credits ##
 * The [Tree](http://html-components.appspot.com/components/data/tree) component 
