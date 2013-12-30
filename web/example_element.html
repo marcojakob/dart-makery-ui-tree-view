@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<link rel="import" href="packages/makery_ui_tree_view/tree_view.html">
+
+<polymer-element name="example-element">
+  <template>
+    <style>
+      tree-view-element {
+        width: 300px;
+        border: 1px solid #a8a8a8;
+        background: #ffffff;
+        color: #4f4f4f;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+    </style>
+  
+    <h2>Single Selection with Strings as Data</h2>
+    <tree-view-element id="strings-single-selection" animate="false" selection="single" 
+      root="{{stringRoot}}">
+    </tree-view-element>
+    
+    <h2>Multiple Selection with Folders and Documents as Data</h2>
+    <tree-view-element id="icons-multiple-selection" animate="true" selection="multiple"
+      root="{{documentRoot}}">
+    </tree-view-element>
+    
+    <button on-click="{{selectChina}}">Select China</button>
+    <button on-click="{{selectDocuments}}">Select Documents</button>
+    
+    <h2>Lazy Loading</h2>
+    <tree-view-element id="lazy-loading" animate="true" selection="multiple"
+      root="{{lazyRoot}}" fetcher="{{lazyFetcher}}">
+    </tree-view-element>
+    
+  </template>
+  <script type="application/dart" src="example_element.dart"></script>
+</polymer-element>    

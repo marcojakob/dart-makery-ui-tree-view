@@ -1,4 +1,4 @@
-part of tree_view;
+part of makery_ui_tree_view.tree_view;
 
 /**
  * Used to (lazy) fetch child items of a parent.

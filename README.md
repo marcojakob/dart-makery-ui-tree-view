@@ -3,24 +3,14 @@ Tree View Dart Polymer Widget
 
 ## Features ##
 * Single- and multi-selection
-* Animation
-* etc.
+* View-model for hierarchical tree items
+* Icon styling (e.g. with custom font icons)
+* Events for selection, expand and collapse
+* Animation for expand and collapse
 
-## Demo ##
-soon...
-
-## Installation ##
-
-### Add Dependency ###
-Add the folowing to your **pubspec.yaml** and run **Pub Get**
-```yaml
-	dependencies:
-	  ???: any
-```
-
-## Usage ##
-soon...
-
+## Example ##
+The example is inside the **`web`** because Pub Build does not work with the 
+`example` directory.
 
 ## Credits ##
 * The [Tree](http://html-components.appspot.com/components/data/tree) component 

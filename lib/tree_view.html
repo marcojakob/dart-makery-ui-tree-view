@@ -2,14 +2,14 @@
 
 <link rel="import" href="tree_item.html">
 
-<polymer-element name="tree-view">
+<polymer-element name="tree-view-element">
   <template>
     <link rel="stylesheet" href="tree_view.css">
     
     <ul class="tree-view-children-ul">
       <template if="{{root != null}}">
         <template repeat="{{child in root.children}}">
-          <tree-item item="{{child}}" treeView="{{instance}}"></tree-item>
+          <tree-item-element item="{{child}}" treeView="{{instance}}"></tree-item-element>
         </template>
       </template>
     </ul>

@@ -1,9 +1,12 @@
-name: tree_view
+name: makery_ui_tree_view
 version: 0.0.1
-description: A sample Polymer application
+description: A TreeView element for Polymer.dart
 dependencies:
   animation: any
   polymer: any
+dev_dependencies:
+  makery_ui_assets:
+    git: https://github.com/marcojakob/dart-makery-ui-assets.git
 transformers:
 - polymer:
     entry_points: web/example.html

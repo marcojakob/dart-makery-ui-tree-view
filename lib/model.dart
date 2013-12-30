@@ -1,4 +1,4 @@
-part of tree_view;
+part of makery_ui_tree_view.tree_view;
 
 /**
  * View-model for hierarchical tree items.
@@ -53,15 +53,34 @@ abstract class TreeItem<T> extends Observable {
   }
   
   /**
-   * Returns the type used to determine the CSS class for icons. For example,
-   * if the type is 'folder', the CSS class will be 'tree-icon-type-folder'.
-   */
-  String get type;
-  
-  /**
-   * Returns the name to be displayed for this item.
+   * The name to be displayed for this item.
    */
   String get name;
+  
+  /**
+   * CSS classes used for the (collapsed) toggle icon.
+   */
+  List<String> get toggleIconStyles;
+  
+  /**
+   * CSS classes used for the expanded toggle icon.
+   */
+  List<String> get toggleIconExpandedStyles;
+  
+  /**
+   * CSS classes used for the (collapsed) item icon.
+   */
+  List<String> get itemIconStyles;
+  
+  /**
+   * CSS classes used for the expanded item icon.
+   */
+  List<String> get itemIconExpandedStyles;
+  
+  /**
+   * CSS classes used for the loading item icon.
+   */
+  List<String> get itemIconLoadingStyles;
   
   /**
    * The children of this item as an unmodifiable list. The children can only

@@ -1,4 +1,4 @@
-library tree_view;
+library makery_ui_tree_view.tree_view;
 
 import 'package:polymer/polymer.dart';
 import 'dart:html' show CustomEvent, Element, EventStreamProvider;
@@ -10,7 +10,7 @@ export 'tree_item.dart';
 part 'data.dart';
 part 'model.dart';
 
-@CustomTag('tree-view')
+@CustomTag('tree-view-element')
 class TreeViewElement extends PolymerElement {
   
   static const String SELECTION_SINGLE = 'single';

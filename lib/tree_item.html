@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 
-<polymer-element name="tree-item">
+<polymer-element name="tree-item-element">
   <template>
     <link rel="stylesheet" href="tree_item.css">
     
     <li class="tree-item-li">
-      <span class="tree-item-content">
+      <div class="tree-item-content">
         <span class="tree-item-toggle" on-click="{{toggle}}"></span><span class="tree-item-icon" on-click="{{select}}" on-doubleclick="{{toggle}}"></span><span class="tree-item-label" on-click="{{select}}" on-doubleclick="{{toggle}}">{{item.name}}</span>
-      </span>
+      </div>
       
       <ul class="tree-item-children">
         <template repeat="{{child in item.children}}">
-          <tree-item item="{{child}}" treeView="{{treeView}}"></tree-item>
+          <tree-item-element item="{{child}}" treeView="{{treeView}}"></tree-item-element>
         </template>
       </ul>
     </li>

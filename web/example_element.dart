@@ -4,9 +4,9 @@ import 'dart:html';
 import 'dart:async';
 import 'package:polymer/polymer.dart';
 
-import 'package:tree_view/tree_view.dart';
+import 'package:makery_ui_tree_view/tree_view.dart';
 
-@CustomTag('tree-view-example')
+@CustomTag('example-element')
 class TreeViewExampleElement extends PolymerElement {
   
   /// Let styles defined in the author's document "bleed" trough to the shadow DOM.
@@ -18,7 +18,7 @@ class TreeViewExampleElement extends PolymerElement {
   void enteredView() {
     super.enteredView();
     
-    shadowRoot.querySelectorAll('tree-view').forEach((TreeViewElement treeView) {
+    shadowRoot.querySelectorAll('tree-view-element').forEach((TreeViewElement treeView) {
       
       treeView.onItemExpanded.listen((CustomEvent event) {
         print('Expanded node: ${event.detail}');
@@ -147,24 +147,40 @@ class Document {
   Document(String this.documentName);
 }
 
+/**
+ * Defines a [TreeItem] for [Document]s.
+ */
 class DocumentTreeItem extends TreeItem<Document> {
   
   DocumentTreeItem(Document data, TreeItem parent) : 
     super(data, parent: parent, isLeaf: true);
   
-  String get type => 'document'; 
-  
   String get name => data.documentName; 
+  
+  List<String> get toggleIconStyles => ['fa', 'fa-caret-right'];
+  List<String> get toggleIconExpandedStyles => ['fa', 'fa-caret-down'];
+
+  List<String> get itemIconStyles => ['fa', 'fa-file-o'];
+  List<String> get itemIconExpandedStyles => ['fa', 'fa-file-o'];
+  List<String> get itemIconLoadingStyles => ['fa', 'fa-spinner', 'fa-spin'];
 }
 
+/**
+ * Defines a [TreeItem] for folders.
+ */
 class FolderTreeItem extends TreeItem<String> {
   
   FolderTreeItem(String data, {TreeItem parent: null, bool isLeaf: true}) : 
     super(data, parent: parent, isLeaf: isLeaf);
   
-  String get type => 'folder'; 
-  
   String get name => data; 
+  
+  List<String> get toggleIconStyles => ['fa', 'fa-caret-right'];
+  List<String> get toggleIconExpandedStyles => ['fa', 'fa-caret-down'];
+
+  List<String> get itemIconStyles => ['fa', 'fa-folder'];
+  List<String> get itemIconExpandedStyles => ['fa', 'fa-folder-open'];
+  List<String> get itemIconLoadingStyles => ['fa', 'fa-spinner', 'fa-spin'];
 }
 
 class LazyFetcher extends TreeDataFetcher {

@@ -1,4 +1,4 @@
-library tree_item;
+library makery_ui_tree_view.tree_item;
 
 import 'package:polymer/polymer.dart';
 import 'dart:html';
@@ -7,7 +7,7 @@ import 'package:animation/animation.dart';
 
 import 'tree_view.dart';
 
-@CustomTag('tree-item')
+@CustomTag('tree-item-element')
 class TreeItemElement extends PolymerElement {
 
   /// The model [TreeItem] represented by this element.
@@ -64,15 +64,31 @@ class TreeItemElement extends PolymerElement {
   
   void _updateItemToggle() {
     Element itemToggle = shadowRoot.querySelector('.tree-item-toggle');
-    updateCssClass(itemToggle, 'tree-icon-toggle', !item.isLeaf && !item.expanded);
-    updateCssClass(itemToggle, 'tree-icon-toggle-expanded', !item.isLeaf && item.expanded);
+    itemToggle.classes..removeAll(item.toggleIconStyles)
+                      ..removeAll(item.toggleIconExpandedStyles);
+    if (!item.isLeaf) {
+      if (!item.expanded) {
+        itemToggle.classes.addAll(item.toggleIconStyles);
+      } else {
+        itemToggle.classes.addAll(item.toggleIconExpandedStyles);
+      }
+    }
   }
   
   void _updateItemIcon() {
     Element itemIcon = shadowRoot.querySelector('.tree-item-icon');
-    updateCssClass(itemIcon, 'tree-icon-type-${item.type}', !loading && !item.expanded);
-    updateCssClass(itemIcon, 'tree-icon-type-${item.type}-expanded', !loading && item.expanded);
-    updateCssClass(itemIcon, 'tree-icon-loading', loading);
+    itemIcon.classes..removeAll(item.itemIconStyles)
+                    ..removeAll(item.itemIconExpandedStyles)
+                    ..removeAll(item.itemIconLoadingStyles);
+    if (!loading) {
+      if (!item.expanded) {
+        itemIcon.classes.addAll(item.itemIconStyles);
+      } else {
+        itemIcon.classes.addAll(item.itemIconExpandedStyles);
+      }
+    } else {
+      itemIcon.classes.addAll(item.itemIconLoadingStyles);
+    }
   }
   
   void _updateItemLabel() {
